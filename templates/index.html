@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automobile Image Quality Checker – AI Vision Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at 25% 10%, #e0e7ff 0%, #f8fafc 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+    }
+    .glow {
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.15);
+    }
+    .fade-in {
+      animation: fadeIn 0.9s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .code-font {
+      font-family: 'Fira Code', monospace;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl glow p-8 fade-in border border-indigo-100">
+    <div class="flex justify-center items-center space-x-3 mb-6">
+      <img src="https://cdn-icons-png.flaticon.com/512/2769/2769339.png" alt="AI Logo" class="w-10 h-10">
+      <h1 class="text-3xl font-extrabold text-indigo-700 tracking-tight">Automobile Image Quality Checker</h1>
+    </div>
+
+    <p class="text-center text-gray-600 mb-6">
+      Powered by a trained <span class="text-indigo-600 font-semibold">AI Vision Model</span> that detects 
+      image anomalies using <strong>edge-variance metrics</strong>, <strong>contrast entropy</strong>, and 
+      <strong>multi-channel histogram patterns</strong> for automotive photo validation.
+    </p>
+
+    <!-- Upload Section -->
+    <form action="/analyze" method="post" enctype="multipart/form-data"
+      class="flex flex-col items-center justify-center space-y-6 border-2 border-dashed border-indigo-300 rounded-xl p-10 bg-indigo-50/50 hover:bg-indigo-100 transition duration-300 ease-in-out">
+      
+      <label class="flex flex-col items-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-indigo-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 16l4-4m0 0l4 4m-4-4v12M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-sm text-indigo-600 font-medium tracking-wide">Click or drop an automobile image to validate</span>
+        <input type="file" name="file" class="hidden" accept="image/*" required />
+      </label>
+
+      <button type="submit"
+        class="bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:-translate-y-0.5">
+        ⚙️ Run Quality Analysis
+      </button>
+    </form>
+
+    <!-- Uploaded Image -->
+    {% if image_url %}
+    <div class="mt-10 text-center fade-in">
+      <h2 class="text-xl font-semibold text-gray-700 mb-2">🖼 Uploaded Automobile Image</h2>
+      <img src="{{ image_url }}" alt="Uploaded Image" class="mx-auto rounded-xl shadow-md max-h-80 border border-gray-200">
+    </div>
+    {% endif %}
+
+    <!-- Results -->
+    {% if result %}
+    <div class="mt-10 text-center fade-in">
+      <div class="inline-block px-8 py-6 rounded-2xl shadow-xl transition duration-500 ease-in-out transform hover:scale-[1.02]
+        {{ 'bg-green-50 border border-green-300' if result['status'].startswith('✅') else 'bg-red-50 border border-red-300' }}">
+        <p class="text-3xl font-extrabold tracking-tight {{ 'text-green-600' if result['status'].startswith('✅') else 'text-red-600' }}">
+          {{ result['status'] }}
+        </p>
+        <p class="text-gray-800 mt-2 text-lg">Detected Issue: 
+          <span class="font-semibold text-indigo-700">{{ result['issue'] }}</span>
+        </p>
+        <p class="text-gray-500 mt-1">{{ result['reason'] }}</p>
+      </div>
+
+      <div class="mt-6 text-sm text-gray-500 code-font">
+        Sharpness Score: <span class="font-semibold text-indigo-600">{{ result['sharpness_score'] }}</span> ·
+        Confidence: <span class="font-semibold text-indigo-600">{{ result['confidence'] }}</span>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <footer class="mt-10 text-gray-400 text-sm text-center">
+    © {{ 2025 }} Automobile Vision Analytics · Built with 🧠 AI & Computer Vision · 
+    <span class="text-indigo-500 font-semibold">Trained on Multi-Defect Vehicle Dataset</span>
+  </footer>
+</body>
+</html>

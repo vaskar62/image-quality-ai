@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "/Users/admin/Desktop/image processing/tfenv/bin/python",
+    "python.analysis.extraPaths": [
+        "/Users/admin/Desktop/image processing/tfenv/lib/python3.10/site-packages",
+        "/Users/admin/Desktop/image processing/tfenv/lib/python3.10/site-packages/tensorflow",
+        "/Users/admin/Desktop/image processing/tfenv/lib/python3.10/site-packages/keras"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true
+}

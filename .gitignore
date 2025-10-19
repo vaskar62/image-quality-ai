@@ -1,0 +1,15 @@
+# Ignore virtual environment and large files
+tfenv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dylib
+.DS_Store
+Library of Don_t Shots/
+Library of Don't Shots-20251007T060612Z-1-001.zip
+models/
+uploads/
+venv/
+.env

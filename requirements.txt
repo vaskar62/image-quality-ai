@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-tensorflow==2.16.2
+tensorflow==2.17.0
 scikit-learn
 joblib
 opencv-python-headless
